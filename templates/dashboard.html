@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BancoSol</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Bienvenido </h2>
+        <div class="menu">
+            <ul>
+                <li><a href="{{ url_for('gestionar_empleados') }}">Gestionar Empleados</a></li>
+                <li><a href="{{ url_for('gestionar_departamentos') }}">Gestionar Departamentos</a></li>
+                <li><a href="{{ url_for('gestionar_reportes') }}">Gestionar Reportes</a></li>
+                <li><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

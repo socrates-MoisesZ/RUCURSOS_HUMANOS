@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Departamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Editar Departamento</h2>
+        
+        <!-- Formulario para editar el departamento -->
+        <form method="POST">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" value="{{ departamento[1] }}" required>
+            <button type="submit">Actualizar</button>
+        </form>
+    </div>
+</body>
+</html>

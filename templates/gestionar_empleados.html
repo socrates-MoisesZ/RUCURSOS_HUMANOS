@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Empleados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Columna para el formulario de agregar empleados -->
+        <div class="form-column">
+            <h2>Gestionar Empleados</h2>
+
+            <!-- Formulario para agregar nuevo empleado -->
+            <form action="/gestionar_empleados" method="POST">
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="text" name="apellido" placeholder="Apellido" required>
+                <input type="text" name="cargo" placeholder="Cargo" required>
+                <select name="departamento_id" required>
+                    {% for dept in departamentos %}
+                        <option value="{{ dept[0] }}">{{ dept[1] }}</option>
+                    {% endfor %}
+                </select>
+                <!-- Campo de fecha con selector de calendario -->
+                <input type="date" name="fecha_contratacion" required>
+                <button type="submit">Agregar Empleado</button>
+            </form>
+        </div>
+
+        <!-- Columna para la lista de empleados -->
+        <div class="table-column">
+            <h3>Lista de Empleados</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cargo</th>
+                        <th>Departamento</th>
+                        <th>Fecha Contratación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empleado in empleados %}
+                    <tr>
+                        <td>{{ empleado[1] }}</td>
+                        <td>{{ empleado[2] }}</td>
+                        <td>{{ empleado[3] }}</td>
+                        <td>{{ empleado[4] }}</td>
+                        <td>{{ empleado[5] }}</td>
+                        <td>
+                            <a href="{{ url_for('editar_empleado', id=empleado[0]) }}">Editar</a> 
+                            <a href="{{ url_for('eliminar_empleado', id=empleado[0]) }}" onclick="return confirm('¿Estás seguro de eliminar este empleado?')">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

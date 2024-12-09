@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Reportes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Empleados por Departamento</h1>
+        
+        <!-- Formulario de selección de departamento -->
+        <form method="POST" action="{{ url_for('gestionar_reportes') }}">
+            <div class="form-group">
+                <label for="departamento">Seleccionar Departamento:</label>
+                <select name="departamento_id" id="departamento" required>
+                    <option value="">Seleccionar...</option>
+                    {% for departamento in departamentos %}
+                        <option value="{{ departamento[0] }}">{{ departamento[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit">Ver Empleados</button>
+        </form>
+
+        <!-- Si hay empleados, mostramos la tabla -->
+        {% if empleados %}
+            <div>
+                <h3>Empleados del Departamento Seleccionado</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Empleado</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for empleado in empleados %}
+                            <tr>
+                                <td>{{ empleado[0] }}</td>
+                                <td>{{ empleado[1] }}</td>
+                                <td>{{ empleado[2] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="no-employees">
+                <p>No hay empleados en este departamento.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Departamentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Gestionar Departamentos</h2>
+
+        <!-- Formulario para agregar un nuevo departamento -->
+        <form method="POST">
+            <label for="nombre">Nuevo Departamento:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <button type="submit">Agregar</button>
+        </form>
+
+        <!-- Tabla de departamentos -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for departamento in departamentos %}
+                <tr>
+                    <td>{{ departamento[0] }}</td>
+                    <td>{{ departamento[1] }}</td>
+                    <td>
+                        <a href="{{ url_for('editar_departamento', id=departamento[0]) }}">Editar</a> |
+                        <a href="{{ url_for('eliminar_departamento', id=departamento[0]) }}" onclick="return confirm('¿Estás seguro de eliminar este departamento?')">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>
